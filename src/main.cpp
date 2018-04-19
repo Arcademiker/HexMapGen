@@ -1,5 +1,3 @@
-//todo write class in capital letter
-
 #include <iostream>
 #include <stdio.h>
 //#include <opencv2/opencv.hpp>
@@ -9,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <bitset>
-#include "../include/hex.h" //change on windows
+#include "../include/hex.h" //change path on windows
 #include <algorithm>    // std::random_shuffle
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
@@ -41,7 +39,7 @@ int main()
 		//opencv statement to show the output image on the user screen
 		imshow("map", output);
 		waitKey(0);
-		//cvWaitKey(1000);
+		//cvWaitKey(80);
 		std::cout << std::endl;
 	}
 
@@ -52,11 +50,10 @@ int main()
 	return 0;
 }
 
-//clear the whole logical HexMap and calling the HexMap generation function makeMap().
+//clears the whole logical HexMap and calls the HexMap generation function makeMap().
 //(HexMap = map out of hexagon shaped tiles)
 Mat reMakeMap()
 {
-	//defines
 	std::vector<std::vector<Hex>> world;
 	std::vector<Hex> line;
 	Edge* edge = new Edge();
@@ -110,6 +107,7 @@ Mat reMakeMap()
 //creates the logical HexMap (map out of hexagon shaped tiles)
 void makeMap(std::vector<std::vector<Hex>> &world)
 {
+	//fill the tile stack with the different hexagonal tiles defined here:
 	std::vector<Hex> tile;
 	//tile.push_back(Hex(std::bitset<7>("0000001"), 0));
 	tile.push_back(Hex(std::bitset<7>("0000011"), 1));
@@ -148,16 +146,16 @@ void makeMap(std::vector<std::vector<Hex>> &world)
 	//tile.push_back(Hex(std::bitset<7>("0000001"), 0));
 	//tile.push_back(Hex(std::bitset<7>("0000011"), 1));
 	tile.push_back(Hex(std::bitset<7>("0000111"), 2));
-	tile.push_back(Hex(std::bitset<7>("0001011"), 3));
+	//tile.push_back(Hex(std::bitset<7>("0001011"), 3));
 	tile.push_back(Hex(std::bitset<7>("0010011"), 4));
-	tile.push_back(Hex(std::bitset<7>("0010111"), 5));
+	//tile.push_back(Hex(std::bitset<7>("0010111"), 5));
 	tile.push_back(Hex(std::bitset<7>("0001111"), 6));
 	tile.push_back(Hex(std::bitset<7>("0101011"), 7));
 	tile.push_back(Hex(std::bitset<7>("0100111"), 8));
-	tile.push_back(Hex(std::bitset<7>("0110111"), 9));
+	//tile.push_back(Hex(std::bitset<7>("0110111"), 9));
 	tile.push_back(Hex(std::bitset<7>("0101111"), 10));
 	tile.push_back(Hex(std::bitset<7>("0011111"), 11));
-	tile.push_back(Hex(std::bitset<7>("0111111"), 12));
+	//tile.push_back(Hex(std::bitset<7>("0111111"), 12));
 	tile.push_back(Hex(std::bitset<7>("1111111"), 13));
 	//
 	////tile.push_back(Hex(std::bitset<7>("0000000"), 14));
@@ -165,17 +163,17 @@ void makeMap(std::vector<std::vector<Hex>> &world)
 	//tile.push_back(Hex(std::bitset<7>("0001010"), 16));
 	//tile.push_back(Hex(std::bitset<7>("0010010"), 17));
 	//tile.push_back(Hex(std::bitset<7>("0011110"), 18));
-	//tile.push_back(Hex(std::bitset<7>("0011110"), 19));
-	//tile.push_back(Hex(std::bitset<7>("0011110"), 20));
+	tile.push_back(Hex(std::bitset<7>("0011110"), 19));
+	tile.push_back(Hex(std::bitset<7>("0011110"), 20));
 	//tile.push_back(Hex(std::bitset<7>("0101110"), 21));
-	//tile.push_back(Hex(std::bitset<7>("0110110"), 22));
-	//tile.push_back(Hex(std::bitset<7>("0110110"), 23));
+	tile.push_back(Hex(std::bitset<7>("0110110"), 22));
+	tile.push_back(Hex(std::bitset<7>("0110110"), 23));
 	//tile.push_back(Hex(std::bitset<7>("0111010"), 24));
-	//tile.push_back(Hex(std::bitset<7>("1011010"), 25));
-	//tile.push_back(Hex(std::bitset<7>("1101010"), 26));
+	tile.push_back(Hex(std::bitset<7>("1011010"), 25));
+	tile.push_back(Hex(std::bitset<7>("1101010"), 26));
 	//tile.push_back(Hex(std::bitset<7>("1111110"), 27));
 	//tile.push_back(Hex(std::bitset<7>("1111110"), 28));
-	//tile.push_back(Hex(std::bitset<7>("1111110"), 29));
+	tile.push_back(Hex(std::bitset<7>("1111110"), 29));
 	//tile.push_back(Hex(std::bitset<7>("1111110"), 30));
 	//tile.push_back(Hex(std::bitset<7>("1111110"), 31));
 
@@ -184,14 +182,14 @@ void makeMap(std::vector<std::vector<Hex>> &world)
 	int x = 12;
 	int y = 8;
 
-	//placing of the first hexagon tile
+	//placing of the first hexagon tile from the stack pile after shuffling the tile stack
 	random_shuffle(tile.begin(), tile.end(), myrandom);
 	int rrand = myrandom(6);
 	tile[tile.size() - 1].rotMec(rrand);
 	world[y][x].set_bitset(world, tile[tile.size() - 1]);
 	tile.pop_back();
 
-	//placing the rest of the hexagon tiles
+	//placing the rest of the hexagon tiles from the stack pile
 	Hex tmp;
 	int tilesize;
 	int counter = 0;
@@ -287,9 +285,15 @@ Mat draw(std::vector<std::vector<Hex>> world)
 			{
 				int r = world[y][x].get_rotN();
 				int s = world[y][x].get_tileNumber();
+				//general topic: there is probably a more elegant solution to search the correct images for the different
+				//tiles. However this rainbowtable solution is fast.
+				//...
+				//look for the correct rotation
+				//(I could rotate the image with opencv however simple 60 degree rotations are ugly)
 				switch (r)
 				{
 				case 0:
+					//look for the correct tile number and load the corresponding image
 					switch (s)
 					{
 					case 0:
@@ -1102,7 +1106,8 @@ Mat draw(std::vector<std::vector<Hex>> world)
 				default:
 					break;
 				}
-				
+
+				//move the pixels over from the hexagonal tiles (ressources images) to the (temporary) screen
 				for (int i = 0; i < 16; i++)
 				{
 					for (int j = 8 - ((i + 1) / 2); j < 23 + ((i + 1) / 2); j++)

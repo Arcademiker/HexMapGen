@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <string>
 #include <bitset>
-#include "../include/edge.h" //change on windows
-#include "../include/hex.h" //change on windows
+#include "../include/edge.h" //change path on windows
+#include "../include/hex.h" //change path on windows
 
 Edge::Edge()
 {

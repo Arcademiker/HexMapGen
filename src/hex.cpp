@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <bitset>
-#include "../include/hex.h" //change on windows
+#include "../include/hex.h" //change path on windows
 
 //using namespace std;
 
@@ -105,10 +105,8 @@ void Hex::set_bitset(std::vector<std::vector<Hex>> &world, Hex tile)
 		}
 	}
 
-	//anlegbare Felder updaten
-	
-	
-	//neu angelegtes Feld aus der Liste nehmen
+	//update fields that have open connection
+	//Remove a newly created field from the list
 	for (int i = 0; i < this->edge->hexlist.size(); i++)
 	{
 		if (this->equals(this->edge->hexlist[i]))
@@ -122,6 +120,7 @@ void Hex::set_bitset(std::vector<std::vector<Hex>> &world, Hex tile)
 
 	this->changed.reset();
 	this->changed.flip();
+
 	world[this->y][this->x].changed[0] = true;
 	
 	world[this->y - 1][this->x].changed[4] = true;
@@ -255,7 +254,7 @@ std::vector<Hex> Hex::edge_clone() {
 	return this->edge->clone();
 }
 
-//partially clone enough
+//partially clone is enough
 Hex Hex::clone() {
 	Hex ret;
 	ret.x = this->get_x();
