@@ -8,6 +8,8 @@
 
 class Hex;
 
+//the class Edge stores the mutual constraints of two hexagonal tiles adjacent to each other,
+//so that the hexagonal tiles can be correctly puzzled together.
 class Edge {
 public:
 	std::vector<Hex> hexlist;

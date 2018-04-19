@@ -12,6 +12,7 @@
 
 class Edge;
 
+//class Hex aggregates class Edge. Edge is one Edge of an Hexagon.
 class Hex
 {
 	int rotN;

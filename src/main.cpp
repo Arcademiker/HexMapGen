@@ -18,6 +18,7 @@ using namespace cv;
 
 int myrandom (int i) { return std::rand()%i;}
 
+//Mat is an opencv image matrix
 Mat reMakeMap();
 void makeMap(std::vector<std::vector<Hex>> &world);
 Mat draw(std::vector<std::vector<Hex>> world);
