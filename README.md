@@ -6,4 +6,6 @@ https://docs.opencv.org/2.4/doc/tutorials/introduction/linux_install/linux_insta
 
 
 
-![hex](https://user-images.githubusercontent.com/15786772/39028961-be10a02c-4459-11e8-810c-4a957ad8a93b.png)
+
+
+![hex2](https://user-images.githubusercontent.com/15786772/39029049-2d09d282-445a-11e8-8a9d-6ac166100773.png)
